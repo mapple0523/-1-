@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!--  li*3하면 li가 3개 생성
+          unordered list  -->
+    <ul type="circle" class="color">
+        <li>Red</li>
+        <li>green</li>
+        <li>Blue</li>
+    </ul>
+    <!-- ordered list 
+         순서대로 표시해줌-->
+
+    <ol type="a" class="menu">
+        <li>title01</li>
+        <li>title02</li>
+        <li>title03</li>
+    </ol>
+
+
+
+
+    <script>
+        // 문서내의 모든 li요소를 선택해서 liLIst가 참조하도록 한다
+        //getELementsByClassName의 결과는 List이다.
+        let ulTag = document.getElementsByClassName("menu")
+        console.log(ulTag[0]) //ol 전체를 가르킴
+        let liList =  ulTag[0].getElementsByTagName("li")
+
+        let olTag = document.getElementsByClassName("color")
+        let liList2 =  olTag[0].getElementsByTagName("li")
+        // 배열안에 있는 요소를 끌어내야 사용가능함
+        console.log(liList[0])//li 제일 위 (0번지)를 가르킴
+        console.log(liList[1])
+        console.log(liList[2])
+        console.dir(liList)//ol의 자식인 li를 받아옴
+
+        // liLIst의 모든 요소에 이벤트 헨들러 한번에 추가
+        for(let i = 0; i < liList.length; i++){
+            console.log(liList[i])
+            liList[i].onclick = function(event){
+                console.log(event.target.innerText);
+                // 값을 찍히는걸 반환해라
+            }
+        }
+
+        for(let j = 0; j < liList2.length; j++){
+            console.log(liList2[j])
+            liList2[j].onclick = function(event){
+                //this는 객체 자신이다.
+                // console.log(this);
+                // == === != !==
+                // 자바스크립트는 this의 정체
+                console.log(this === event.target)
+                let colorName = this.innerText;
+                liList2[j].style.backgroundColor = colorName
+
+            }
+        }
+
+    </script>
+
+    
+</body>
+</html>

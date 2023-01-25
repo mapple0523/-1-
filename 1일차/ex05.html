@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            border:2px solid red;
+            /* left는 요소가 레이어여야 적용된다. position */
+            /* absolute는 절대적인 좌표값 relative는 자식을 보고 상대적인값 */
+            position: relative;;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            transition: all 1s;
+        }
+    </style>
+</head>
+<body>
+    <button id="playBtn">0.0</button>
+    <button id="playBtn1">0,200</button>
+    <button id="playBtn2">200,200</button>
+    <button id="playBtn3">200,0</button>
+    <div id="box">Box</div>
+
+    <script>
+        let playBtn = document.getElementById("playBtn")
+        let playBtn1 = document.getElementById("playBtn1")
+        let playBtn2 = document.getElementById("playBtn2")
+        let playBtn3 = document.getElementById("playBtn3")
+        let colors = ['blue', 'purple', 'green', 'pink']
+        let box = document.getElementById("box")
+
+        //과제
+        playBtn.onclick = function(event){
+            box.style.left="0px"
+            box.style.top="0px"
+            box.style.right="0px"
+            box.style.bottom="0px"
+        }
+
+        playBtn1.onclick = function(event){
+            box.style.left="200px"
+            box.style.top="0px"
+            box.style.right="0px"
+            box.style.bottom="200px"
+        }
+
+        playBtn2.onclick = function(event){
+            box.style.left="200px"
+            box.style.top="200px"
+            box.style.right="200px"
+            box.style.bottom="200px"
+        }
+
+        playBtn3.onclick = function(event){
+            box.style.left="0px"
+            box.style.top="200px"
+            box.style.right="0px"
+            box.style.bottom="0px"
+        }
+    </script>
+</body>
+</html>

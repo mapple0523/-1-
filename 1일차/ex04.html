@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul type="1">
+        <li>오징어</li>
+        <li>꼴뚜기</li>
+        <li>대구</li>
+        <li>명태</li>
+        <li>거북이</li>
+    </ul>
+
+    <script>
+        // 자바 스크립트에는 char타입이 없다.
+        // 홀따옴표 쌍따옴표 모두 문자열로 사용된다.
+
+        let colors = ['red','green', 'blue','orange', 'pink']
+        let lis = document.getElementsByTagName("ul")[0].getElementsByTagName("li")
+        // ui안에서 li를 찾아라
+        console.dir(lis)
+
+        // let은 함수단위 var는 블록단위
+        for(let i=0; i<lis.length; i++) {
+            console.log(lis[i])
+            // lis[i].style.backgroundColor =colors[i]
+            // 각각의 li 요소의 배경색으로 colors의 색상을 적용 시켜라
+            // ----
+            // 해결 힌트: 자바스크립트 객체는 캡슐화 안됨. 필요한 속성을 객체에 임의로 추가할수있다
+            // lis[i].i=i; 임시저장값
+            lis[i].onclick = function(event) {
+                event.target.style.background=colors[i]
+                // lis[i].style.backgroundColor =colors[i]
+            }
+        }
+        // 이미 i는 0~5까지 반복되었다.
+        //그런후에 이벤트가 발생한다.
+    </script>
+</body>
+</html>
