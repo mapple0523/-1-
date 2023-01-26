@@ -1,0 +1,88 @@
+ <!-- 내용을 가질수 없는요소는 단독 태그라고함 -->
+    <!-- 메타 태그는 검색을 잘되도록 함 -->
+    <!-- 블락태그와 인라인태그로 나뉨 -->
+     div 태그 p태그는 단락태그로 사용됨 
+    <h1 title="header">Hello HTML5</h1> 
+    <!-- 속성이름/속성값 -->
+    <img src=""><img/>
+    <audio src=""></audio>
+    <a href=""></a> 
+    <!-- href=참조 하고있다. -->
+    <hr>
+     <!--p:문단 hr:줄을 그어줌  
+    문단과 문단은 자동으로 띄어쓰기가 일어남 블락태그는 한블락을 다차지함 
+    그래서 자동으로 줄 바꿈이됨 -->
+    <!--  <li><a href="https://www.naver.com/" target="_blank">네이버</a></li>
+    blank를 주어서 비워둘수있음 -->
+    <!-- #id 를붙여서 그 태그의 위치에있는데로 이동하게하거나
+    실행하게함 -->
+    <!-- b=굵은것 i=이태리 sub=아래 sup=위 ins= 밑줄 글자 del=취소선이 그어진 글자  -->
+    <!-- list-style:none;    /* 앞에 있는 점 없애는것 */ -->
+    <!-- float: left;
+    /* 띄워서 움직임 그로인해서 ul에서 빠져나감 */ -->
+    <!-- overflow: hidden; 
+    /* 높이가 없어도 보여줌 */ -->
+    <!-- box-sizing: border-box; 안으로 마진이 늘어남 -->
+
+    line-height:40px; 
+    텍스트 행의 높이
+    /* vertical-align:50px; */도 있음
+    #nav li::
+    두개는 가상선택자
+
+    margin: 0 auto;
+    오토는 빈칸을 다 사용하는거지만 좌우가 빈칸이기때문에 가운데정렬임
+    
+-----------------------------------------------------------
+    table border="1" width="400" height="300"
+    테이블 태그 자체속성으로 적용해줄수있음
+
+    테이블자체에 넣으면 테이블이이동
+    th는 테이블헤드
+    tr에넣으면 그행전체가이동
+    td에넣으면 그 하나만 이동
+
+    rowspan="2" 열을 합쳐줌
+    calspan="2" 행을 합쳐줌
+
+    레이아웃은 레이어로 만들고
+    테이블로 레이아웃을 만들면 안된다.
+
+    <caption>회원목록</caption>
+    테이블의 제목을 나타냄
+----------------------------------------------------------------------
+미디어태그
+
+img src="경로" alt="만약 그림이 존재하지않으면 나오는 글이나 그림"
+
+background-image: url("/images/bridge.jpg");
+배경을 이미지로 사용할수있음
+background-size: 100px 100px;
+background-repeat: no-repeat;
+자동으로 반복되기떄문에 반복이 안되도록 no-repeat를 넣어줌
+background-position:center;
+배경의 위치를 가운데로
+
+background-attachment: scroll;
+스크롤이 올라가거나 내려가면 배경이 고정되어있음
+fix로하면 같이 따라올라감
+
+-----------------------------------------------------------
+get방식은 url뒤에 쿼리스트링 같이 딸려가는것
+post방식은 바디에 담겨서 전송 url에 표시되지않음
+
+ajax 비동기
+
+fieldset
+필드셋으로 감싸고 
+<legend>Login</legend>  를 이용하여서 감쌀수있음
+
+label id와 input 의 id를 같게하면 라벨만 눌러도 입력이 가능함
+
+<input type="radio" name="gender" value="남" checked> 남
+라디오버튼을 이용해서 남 여 체크하게하는기능
+
+<input type="checkbox" name="hobby" value="축구" checked> 축구
+체크박스를 이용하여서 취미 선택하게하기 
+
+checked를 이용하여 체크되어있는걸로 보이기

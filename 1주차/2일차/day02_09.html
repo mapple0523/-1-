@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>
+        <legend>폼 태그 연습</legend>
+        <label for="user_name">성명</label> 
+        <input type="text" name="user_name" id="user_name"><br/>
+        성별:
+        <input type="radio" name="gender" value="남" checked> 남
+        <input type="radio" name="gender" value="여"> 여
+        <br/>
+        <input type="checkbox" name="hobby" value="축구" checked> 축구
+        <input type="checkbox" name="hobby" value="야구"> 야구
+        <input type="checkbox" name="hobby" value="농구"> 농구
+        <input type="checkbox" name="hobby" value="코딩"> 코딩
+        <br/>
+        <select name="사는곳" id="사는곳">
+            <option value="서울">서울</option>
+            <option value="대구" selected>대구</option>
+            <option value="부산">부산</option>
+            <option value="광주">광주</option>
+            <option value="울산">울산</option>
+        </select>
+        <br/>
+        이메일: <input type="email" name="email">
+        <br/>
+        나이:input type="number" name="age">
+        <br/>
+        <input type="submit" value="전송">
+    </fieldset>
+</body>
+</html>

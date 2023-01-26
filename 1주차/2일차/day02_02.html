@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 이름 옆에 자식이름을 넣으면 그 자식만 적용됨 */
+        #nav ul{
+            border :0px solid red;
+            list-style:none; /* 앞에 있는 점 없애는것 */
+            padding:0;
+            overflow: hidden; 
+            /* 높이가 없어도 보여줌 */
+            box-sizing: border-box;
+            /* 마진이 안으로 늘어남. */
+        }
+        #nav li {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            border-left: 0px solid black;
+            border-right: 0px solid black;
+            width: 200px;
+            height: 40px;
+            line-height:40px;  
+            /* display: inline-block\  상위 브라우저에만 가능함*/
+            display:block; 
+            float: left;
+            text-align:center;
+            /* 띄워서 움직임 그로인해서 ul에서 빠져나감 */
+        }
+        #nav li:hover {
+            background-color: red;
+        }
+        h1{
+            text-align:center;
+            width:1000px;
+        }
+        div#page{
+            width:1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">
+       <div id="head">
+           <h1>길동이의 홈페이지</h1>
+           <div id="nav">
+               <ul>
+                   <li>Home</li>
+                   <li>Profile</li>
+                   <li>Gallery</li>
+                   <li>Lecture</li>
+                   <li>Board</li>
+               </ul>
+           </div>
+           <div id="content">
+            <h2>어서오세요.</h2>
+           </div>
+       </div>
+    </div>
+</body>
+</html>

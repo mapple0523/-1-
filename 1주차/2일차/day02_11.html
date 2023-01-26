@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #calc {
+            width: 210px;
+        }
+        #calc button {
+            width: 50px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>계산기</h1>
+    <input type="text" name="number" value="2"><br/>
+    <input type="text" name="number2" value="5"><br/>
+    <div id="calc"></div>
+    <select id="oper">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+<input type="button" id="resultBtn" value="확인">
+<div id="result">결과 : </div>
+
+<script>
+    let calc = document.getElementById("calc");
+    let number = document.getElementById("number");
+    let number2 = document.getElementById("number2");
+    let result = document.querySelector("#result");
+    let a = 0;
+    let b = 0;
+    let state=1;
+    
+    for(var i=0; i<16; i++) {
+        let newBtn = document.createElement("button");
+        newBtn.innerText = i;
+        calc.appendChild(newBtn);
+
+
+        newBtn.onclick = function(event) {
+            if (state == 1){
+                a= parseInt(event.target.innerText);
+                --state
+            }
+            else {
+                b= parseInt(event.target.innerText);
+                ++state
+            }
+            switch(oper.value){
+            case "+":  
+                result.innerHTML = "결과 : " + (a + b);
+            break;
+            case "-": 
+                result.innerHTML = "결과 : " + (a - b);
+            break;
+            case "*": 
+                result.innerHTML = "결과 : " + (a * b);
+            break;
+            case "/": 
+                result.innerHTML = "결과 : " + (a / b);
+            break;
+        }
+        }
+    }
+
+</script>
+</body>
+</html>

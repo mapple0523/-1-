@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width:400px;
+            height:400px;
+            border:1px solid gray;
+            background-image: url("/images/bridge.jpg");
+            background-size: 100px 100px;
+            background-repeat: no-repeat;
+            /* 자동반복되기떄문에 반복이 안되도록 하려고 넣음 */
+            background-position:center;
+            background-attachment: scroll;
+            overflow:auto;
+            /* background-attachment: scroll;
+            스크롤이 올라가거나 내려가면 배경이 고정되어있음
+            fix로하면 같이 따라올라감 */
+        }
+    </style>
+</head>
+<body>
+    <div id="box">box 
+    <div id="box">box 
+    </div>
+</body>
+</html>
