@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius:5px;
+        }
+        div div{
+            border:1px solid red;
+            padding: 10px;
+        }
+
+        div.header {
+            border: 1px solid red;
+            width: 1000px;
+            height:82px;
+            /* overflow: hidden; */
+            /* 내용의 크기에 맞춰짐 */
+        }
+        nav li{
+            float:left;
+            list-style:none;
+            width:150px;
+            height:50px;
+            border:1px solid black;
+        }
+        div.center{
+            width: 1000px;
+            height:280px;
+            /* overflow:hidden
+            쓰지않은이유: left와 middle의 크기가 다르기때문에 hidden을 사용하지 않았음. */
+        }
+        div.center div{
+            float:left;
+        }
+        .center .middle{
+            width: 500px;
+            height:260px;
+        } 
+        .middle div:first-child{
+            width: 480px;
+        }
+        .middle div{
+            width:480px;
+        }
+        .center .left{
+            width:200px;
+            height:260px;
+        }
+        .center li{
+            list-style: none;
+            width:100px;
+            height:20px;
+            border:1px solid black;
+        }
+        .center .right{
+            width:200px;
+            height:260px;
+        }
+        div.bottom {
+            clear:both;
+            width:1000px;
+            height:100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <nav class>
+                <h1>123</h1>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </nav>
+        </div>
+
+
+        <div class="center">
+            <div class="left">
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>
+            <div class="middle">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+            </div>
+            <div class="right">
+                123
+            </div>
+        </div>
+
+        <div class="bottom">
+            123
+        </div>
+    </div>
+</body>
+
+</html>
