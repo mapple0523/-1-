@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list 슬라이더 실습</title>
+    <style>
+        #lists {
+            border: 1px solid black;
+            padding: 0;
+            width:1000px;
+            padding:0;
+            margin:0;
+            box-sizing:border-box;
+        }
+
+        #lists>li {
+            border:1px solid red;
+            list-style: none;
+            display: inline-block;
+            width: 80px;
+            text-align: center;
+            box-sizing:border-box;
+        }
+
+        #box {
+            width: 600px;
+            position:relative;
+            border: 1px solid green;
+            box-sizing:border-box;
+        }
+
+        #box>button, #box>div#slider {
+            float: left;
+            position:absolute;
+        }
+        #box>button{
+            width: 40px;
+        }
+        #box> div#slider {
+            position:absolute;
+            left:40px;
+        }
+        #box > button#rightBtn{
+            position:absolute;
+            left:500px;
+        }
+        #slider {
+            border : 1px solid blue;
+            width: 440px;
+            overflow: hidden;
+            box-sizing:border-box;
+        }
+        #box ul#lists{
+            position:relative;
+            transition: left .5s;
+            left:0px;
+            /* transition 적용은 초기값이 있어야지 적용된다. */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>민재의 코딩교실</h1>
+    <hr>
+    <div id="box">
+        <button id="leftBtn">left</button>
+        <div id="slider">    
+            <ul id="lists"></ul>
+        </div>
+        <button id="rightBtn">right</button>
+    </div>
+
+    <script>
+        let itemNames = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7', 'item8', 'item9', 'item10', 'item11', 'item12']
+        let lists = document.getElementById('lists');
+        let box = document.getElementById('box');
+        let leftBtn = document.getElementById('leftBtn');
+        let rightBtn = document.getElementById('rightBtn');
+        itemNames.forEach(function (item, index, arr) {
+            //console.log(index);
+            let newLi = document.createElement("li");
+            newLi.innerHTML = itemNames[index];
+            newLi.className = "itemLi";
+            lists.appendChild(newLi);
+        });
+        //item과 인덱스와 배열을 불러옴
+
+
+        let x=0;
+        rightBtn.onclick = function() {
+            x += 80;
+            lists.style.left = x + "px";
+            //스타일을 변하게 하고싶으면 뒤에값을 ""안에다가 적어주어야함
+            if(x>0){
+                x = 0;
+                alert("처음입니다.")
+            }
+            //console.log(x)
+        }
+        leftBtn.onclick = function(){
+            x -= 80;
+            lists.style.left = x + "px";
+            if(x<-880){
+                x = -880;
+                alert("마지막입니다.")
+            }
+            //console.log(x)
+        }
+    </script>
+</body>
+
+</html>
