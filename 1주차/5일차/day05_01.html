@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스 돌아가기 실습</title>
+</head>
+<style>
+    #box {
+        border: 0px solid black;
+        width: 300px;
+        height: 300px;
+        transform: rotate(0deg);
+        position: relative;
+        left: -100px;
+        transition: transform .5s;
+    }
+
+    /* #box:hover {
+        transform: rotate(90deg)
+    } */
+
+    #box>div {
+        border: 1px solid green;
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: 100px;
+        background-color: red;
+        background-image: url("images/animal.jpg");
+        background-size: 400px 400px
+    }
+    /* 90도를 해당하는 박스 */
+    #box>div:nth-child(2) {
+        transform: rotate(270deg);
+        transform-origin: center 150px;
+        background-color: bisque;
+        background-position: -100px 0;
+    }
+
+    #box>div:nth-child(3) {
+        transform: rotate(180deg);
+        transform-origin: center 150px;
+        background-color: aqua;
+        background-position: -200px 0;
+    }
+
+    #box>div:nth-child(4) {
+        transform: rotate(90deg);
+        transform-origin: center 150px;
+        background-color: aquamarine;
+        background-position: -300px 0;
+
+    }
+
+    #slider {
+        border: 1px solid orange;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+    }
+</style>
+
+<body>
+    <div>
+        <button id="rotateBtn">Rotate</button>
+    </div>
+    <div id="slider">
+        <div id="box">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </div>
+    </div>
+    <script>
+        let rotateBtn = document.getElementById("rotateBtn");
+        let box = document.getElementById("box");
+        let a = 0;
+        let count = 0;
+        
+        rotateBtn.onclick = function (event) {
+            count += 1;
+            //count = count % 4 --다시 첫번째로 돌아와서 무한루프가 안됨.
+            a = count * 90; 
+            
+            box.style.transform = "rotate(" + a + "deg)";
+            //바로 rotate를 넣는게아니라 "안에넣고 값을 넣어줘야 됨."
+        }
+        //버튼을 누를때마다 90가 추가되어서 이미지가 변함
+    </script>
+</body>
+
+</html>
