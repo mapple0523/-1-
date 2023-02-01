@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수 실습</title>
+</head>
+<body>
+    <script>
+        // 자바스크립트 함수의 특징
+        // this == window
+        // 전역에서는 window가 this임
+        // var, function은 window의 멤버이다.
+        // let art1 = "김길동";
+        // let art2 = "이길동";
+        // let art3 = "삼길동";
+        // let art4 = "사길동";
+        var art1 = "김길동";
+        var art2 = "이길동";
+        var art3 = "삼길동";
+        var art4 = "사길동";
+
+        // console.dir(window.art1)
+        for (let i=1; i<=4; i++) {
+            document.write(window['art'+i]+"<p/>")
+        }
+    </script>
+</body>
+</html>
