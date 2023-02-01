@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation실습</title>
+    <style>
+        /* 키프레임으로 지정해주어야함. */
+        /* @keyframes box{
+            from {background-color: red;}
+            to {background-color: yellow;}
+            /* from{;} 안에다가 ;을 붙여줘야함.--당연한건데이건..? }*/
+
+        @keyframes box {
+            0% {
+                background-color: red;
+            }
+            25% {
+                background-color: green;
+                width: 300px;
+                left:200px;
+            }
+            50% {
+                background-color: blue;
+                height: 300px;
+                transform: rotate(-360deg);
+            }
+            75% {
+                background-color: yellow;
+            }
+        }
+        #box{
+            width:100px;
+            height:100px;
+            /* border:1px solid blue; */
+            background-color: red;
+            animation-name:box; 
+            /* 애니메이션을 할려면 이름을 붙여줘야함 */
+            animation-duration:3s;
+            animation-iteration-count: 1; /* 무한으로 돌아라 */
+            /* animation-direction: reverse; 반대로 돌아라 alternative-reverse:돌아갓다가 와라 */
+            position:relative;
+            left:0px;
+            transform: rotate(0deg);
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h1>CSS3 애니메이션 실습.</h1>
+    <div id="box">box</div>
+</body>
+</html>
