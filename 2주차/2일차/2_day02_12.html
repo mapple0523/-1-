@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수 실습1</title>
+
+    <style>
+        div#box {
+            border: 1px solid black;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: royalblue;
+            position: relative;
+            left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="playBtn">Play</button>
+    <div id="box">box</div>
+
+    <script>
+        let playBtn = document.getElementById("playBtn")
+        let box = document.querySelector('#box');
+
+        let boxstyle = getComputedStyle(box);
+        //박스에 대한 스타일을 다읽어오는것
+        let x = parseInt(boxstyle.left);
+        let y = boxstyle.width;
+        let width = boxstyle.height;
+        // console.log(box.offsetWidth);
+        // console.log(x,y,width)
+        let move = function () {
+            let refInterval = setInterval(function () {
+                x += 10;
+                // if(x==1000){
+                //     x=0;
+                // }
+                if (x >= 400) {
+                    x = 300;
+                    clearInterval(refInterval);
+                }
+                box.style.left = x + "px";
+            }, 1000 / 30)
+        };
+
+        playBtn.onclick = move;
+
+    </script>
+</body>
+
+</html>
