@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수타입 차이알기</title>
+</head>
+<body>
+    
+    <script>
+        //자바스크립트 변수 선언, 변수를 선언할떄는 타입이 정해지지않음
+        //변수에 저장 되는 데이터의 타입에 따라 변수 타입이 정해짐--daynamic type임
+
+        // let name1 = "홍길동";
+        // console.log(typeof name1)
+
+        // let name1;
+        // console.log(typeof name1) -- undefined
+
+        //var선언한 변수는 범위가 함수 단위.
+        var name1="홍길동"
+        console.log(typeof name1)
+        name1=200;//나중에 저장된걸로 값이 변경됨
+        console.log(typeof name1)
+
+        //let으로 선언하면 범위가 블록단위
+        //페이지 최상위 객체는 window이고 var선언한 변수는 window의 필드로 추가
+        //function으로 선언한 함수 역시 window의 멤버로 추가됨.
+        let name2 = "일지매"
+        
+        console.dir(window)
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수 차이 알기3</title>
+</head>
+<body>
+    <script>
+        let a=0;
+
+        if(true){
+            let a = 200;
+        }
+
+        function aaa(){
+            //window멤버가 아닌 함수 안에서만 적용됨
+            var b ="hello";
+            c = "world" //window의 필드로 추가됨.
+        }
+        aaa();
+        console.log(a);
+    </script>
+</body>
+</html>
