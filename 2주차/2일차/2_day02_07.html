@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화살표함수와 function의 차이</title>
+</head>
+<body>
+    
+    <script>
+
+        function People(_name) {
+            this.name = _name
+
+            this.move = function() {
+                console.log(this)
+                let cnt = 0;
+
+                let ref = setInterval(() => {
+                    //화살표 함수로 되는것이있고 function으로 안되는것이 있다.
+                    console.log(this.name)
+                    if(++cnt>=2){
+                        clearInterval(ref);
+                        
+                    }
+                },500)
+            }
+        }
+
+        let b = new People("박");
+        b.move();
+    </script>
+</body>
+</html>
