@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>li로 눌렀을때 반응(함수)</title>
+    <style>
+        ul#menu li{
+            display:inline-block;
+            width:100px;
+            height:40px;
+            border:2px solid black;
+            line-height: 40px;
+            text-align: center;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>- 메뉴 -</h1>
+    <ul id ="menu">
+        <li data-no="0">입력</li>
+        <li data-no="1">출력</li>
+        <li data-no="2">검색</li>
+        <li data-no="3">수정</li>
+        <li data-no="4">삭제</li>
+    </ul>
+    <script>
+        let menu = document.querySelectorAll('ul#menu li');
+
+        let menuFactory = [
+            function(){
+                console.log(">>>입력 기능");
+            },
+            function(){
+                console.log(">>>출력 기능");
+            },
+            function(){
+                console.log(">>>검색 기능");
+            },
+            function(){
+                console.log(">>>수정 기능");
+            },
+            function(){
+                console.log(">>>삭제 기능");
+            }
+        ]
+        //console.dir(menu)
+        // for(let i=0; i<menu.length; i++) {
+        //     menu.onclick = function(event){
+        //         //function으로 선언하면 this는 target이다.
+        //         //화살표 함수로 하면 window다.
+        //         console.log(event.target)
+        //         console.log(event.target.dataset.no)
+        //     }
+        // }
+
+        for(let menus of menu) {
+            menus.onclick = function(event) {
+                let no = Number(event.target.dataset.no);
+                menuFactory[no]();
+            }
+        }
+    </script>
+</body>
+</html>
