@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수안에서의 this</title>
+</head>
+<body>
+    
+    <script>
+
+        //People 객체 내부에서 this는 People 객체 자신
+        //setInterval 함수에서 this는 다시 Window의 객체가 된다.
+        function People(_name) {
+            this.name = _name
+            //현재 name에 박이 들어가있음
+            this.move = function() {
+                console.log(this)//현재 People 자신
+                let cnt = 0;
+
+                let THIS = this;
+                let ref = setInterval(function() {
+                    //console.log(this) //현재 window
+                    //console.log(this.name) People의 name을 접근하지 않는다.
+                    //setInterval 내부에서 People의 멤버를 접근하는 방법은?
+                    console.log(THIS.name) //window를 People로 변환
+                    if(++cnt>=2){
+                        clearInterval(ref);
+                        
+                    }
+                },500)
+            }
+        }
+
+        let b = new People("박");
+        b.move();
+    </script>
+</body>
+</html>
