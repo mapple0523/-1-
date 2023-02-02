@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수를 for문에 담아서 사용하는것</title>
+</head>
+<body>
+    <script>
+        //함수를 배열에 담아서 사용
+        let factory = [
+            function(){
+                return null;
+            },
+            function(){
+                return null;
+            },
+            function(){
+                return "Hello world";
+            },
+            function(){
+                return null;
+            },
+        ];
+
+        for(let i = 0; i < factory.length; i++){
+            try{
+                // 정상적으로 실행되면 try문으로 실행됨.
+                console.log("문자열의 길이:",factory[i]().length)
+                break;
+            } catch(e){
+                //문자열의 길이를 찍지못하면 =예외가 나오면 catch구문으로
+                console.log("null입니다.")
+                continue;
+            }
+        }
+        console.log("끝!");
+
+        
+    </script>
+</body>
+</html>
