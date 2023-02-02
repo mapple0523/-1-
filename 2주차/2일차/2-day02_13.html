@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7일차 과제</title>
+    <style>
+        div#gameBox {
+            border: 1px solid aqua;
+            width: 306px;
+            height: 306px;
+            overflow:hidden;
+        }
+        div#gameBox ul{
+            padding: 0px;
+            margin: 0px;
+            float:left;
+        }
+        div#gameBox li{
+            width: 100px;
+            height: 100px;
+            list-style:none;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>햄버거 하우스 게임.</h1>
+    <div id="gameBox"> </div>
+
+    <script>
+        function MakeUl(gameBox) {
+            this.init = function () {
+                this.ulTag = document.createElement('ul');
+                for (let i = 0; i < 10; i++) {
+                    let li = document.createElement('li');
+                    li.innerText = i;
+                    this.ulTag.appendChild(li);
+                }
+                gameBox.appendChild(ulTag);
+                //게임 실행
+                this.play();
+            }
+            this.play = function(){
+                this.ulTag.style.position = "absolute";
+                this.y= 0;
+                let refInterval = setInterval(function(){
+                    this.y -= 10;
+                    this.ulTag.style.top = this.y + "px";
+            },30)
+            }
+        }
+
+        let gameBox = document.getElementById('gameBox');
+        new MakeUl(gameBox).init();
+        new MakeUl(gameBox).init();
+        new MakeUl(gameBox).init();
+    </script>
+</body>
+
+</html>
