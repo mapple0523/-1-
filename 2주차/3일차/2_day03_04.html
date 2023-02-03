@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #btns > button {
+            background-color:green;
+        }
+    </style>
+</head>
+<body>
+    <div id="btns">
+        <button>오렌지</button><br/>
+        <button>바나나</button><br/>
+        <button>수박</button>
+        <div id="demos">123</div>
+    </div>
+
+    <script>
+        let btns = document.querySelectorAll("div#btns > button");
+        let demos = document.querySelector("#demos");
+        //NodeLIst는 활용 가능한 내장 메소드가 제한적이다.
+        //Array로 변환하면 Array에는 더 풍부한 메소드가 저장되어있다.
+        let arr= [];
+        btns.forEach(function(item,index){
+            arr.push(item);
+        });
+        //javascript의 array로 변환해서 사용
+        //item은 버튼의 array를 나타낸다
+        arr.forEach(function(item,index){
+            item.addEventListener("click",function(){
+                // console.log(index)
+                // console.log(event.target.innerText)
+                switch(event.target.innerText){
+                    case "오렌지": console.log("오렌지")
+                    result = "오렌지";
+                    break;
+                    case "바나나": console.log(event.target.innerText)
+                    result = "바나나";
+                    break;
+                    case "수박": console.log(event.target.innerText)
+                    result = "수박"
+                }
+                demos.innerHTML = result+"를 선택했습니다"
+            })
+        })
+    </script>
+</body>
+</html>
