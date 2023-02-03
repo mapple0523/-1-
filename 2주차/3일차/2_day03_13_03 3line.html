@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>햄버거 하우스 게임.</title>
+    <style>
+        div.gameBox {
+            border: 1px solid orange;
+            width: 308px;
+            height: 108px;
+            overflow: hidden;
+        }
+
+        div.gameBox ul {
+            margin: 0;
+            padding: 0px;
+            float: left;
+        }
+
+        div.gameBox li {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            list-style: none;
+        }
+
+        div.gameBox2 {
+            border: 1px solid orange;
+            width: 308px;
+            height: 108px;
+            overflow: hidden;
+        }
+
+        div.gameBox2 ul {
+            margin: 0;
+            padding: 0px;
+            float: left;
+        }
+
+        div.gameBox2 li {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            list-style: none;
+        }
+
+        div.gameBox3 {
+            border: 1px solid orange;
+            width: 308px;
+            height: 108px;
+            overflow: hidden;
+        }
+
+        div.gameBox3 ul {
+            margin: 0;
+            padding: 0px;
+            float: left;
+        }
+
+        div.gameBox3 li {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>햄버거 하우스 게임</h1>
+    <div class="gameBox"></div>
+    <div class="gameBox2"></div>
+    <div class="gameBox3"></div>
+    <button id="reroll">시작</button>
+    <div id="result">성공하면 글자가 나타납니다.</div>
+
+    <script>
+        let yCos = [0, -101, -203, -306, -407, -509, -612, -714, -815, -918];
+        let n1, n2, n3;
+        let count = 0;
+        let stopcount = [];
+        let reroll = document.querySelector("#reroll");
+        let result = document.querySelector("#result");
+
+        function MakeUl(gameBox) {
+            this.ulTag = document.createElement("ul");
+            this.init = function () {
+                // 배경 색을 준비.
+                let colors = ['orange', 'greenyellow', 'pink', 'aqua', 'yellow']
+                for (let i = 1; i <= 10; i++) {
+                    let li = document.createElement("li");
+                    li.style.backgroundColor = colors[i % 5]
+                    li.innerText = i;
+                    this.ulTag.appendChild(li);
+                }
+                gameBox.appendChild(this.ulTag);
+
+                // 게임 실행
+                //this.play();
+
+            }
+
+            this.play = function () {
+                this.ulTag.style.position = "relative";
+                let y = 0;
+                let cnt = 0;
+
+                let stop = Math.abs(Math.floor(Math.random() * 4));
+                if (stopcount.length <= 9) {
+                    stopcount.push(stop + 2)
+                    for (let i = 0; i < stopcount.length; i++) {
+                        if (stopcount[i] > 10) {
+                            stopcount[i] = 10
+                        }
+                    }
+                    console.log(stopcount)
+                }
+                let refInterval = setInterval(() => {
+                    y -= 10;
+                    if (y <= -1000) {
+                        y = 0;
+                        //console.log(cnt, stop);
+                        if (cnt >= stop) {
+                            clearTimeout(refInterval);
+                        }
+                        cnt++;
+                    }
+                    this.ulTag.style.top = yCos[cnt] + "px";
+                }, 10);
+
+            }
+        }
+
+        let gameBox = document.querySelector(".gameBox");
+        let box1 = new MakeUl(gameBox)
+        let box2 = new MakeUl(gameBox)
+        let box3 = new MakeUl(gameBox)
+        box1.init();
+        box2.init();
+        box3.init();
+        let gamebox2 = document.querySelector(".gameBox2");
+        let box4 = new MakeUl(gamebox2);
+        let box5 = new MakeUl(gamebox2);
+        let box6 = new MakeUl(gamebox2);
+        box4.init();
+        box5.init();
+        box6.init();
+        let gamebox3 = document.querySelector(".gameBox3");
+        let box7 = new MakeUl(gamebox3);
+        let box8 = new MakeUl(gamebox3);
+        let box9 = new MakeUl(gamebox3);
+        box7.init();
+        box8.init();
+        box9.init();
+
+
+
+        reroll.addEventListener("click", (event) => {
+            result.innerHTML = "성공하면 글자가 나타납니다."
+            stopcount.length = 0
+            box1.play();
+            box2.play();
+            box3.play();
+            box4.play();
+            box5.play();
+            box6.play();
+            box7.play();
+            box8.play();
+            box9.play();
+            console.log(stopcount)
+            
+            if ((stopcount[0] == stopcount[1]) && (stopcount[1] == stopcount[2]) && (stopcount[0] == stopcount[2])) {
+                result.innerHTML = "첫번째 가로줄 성공!"
+            }
+            else if ((stopcount[3] == stopcount[4]) && (stopcount[3] == stopcount[5]) && (stopcount[4] == stopcount[5])) {
+                result.innerHTML = "두번째 가로줄 성공!"
+            }
+            else if ((stopcount[6] == stopcount[7]) && (stopcount[6] == stopcount[8]) && (stopcount[7] == stopcount[8])) {
+                result.innerHTML = "세번째 가로줄 성공!"
+            }
+            else if ((stopcount[0] == stopcount[3]) && (stopcount[0] == stopcount[6]) && (stopcount[3] == stopcount[6])) {
+                result.innerHTML = "제일 왼쪽 세로줄 성공!!"
+            }
+            else if ((stopcount[1] == stopcount[4]) && (stopcount[1] == stopcount[7]) && (stopcount[4] == stopcount[7])) {
+                result.innerHTML = "두번째 세로줄 성공!!"
+            }
+            else if ((stopcount[2] == stopcount[5]) && (stopcount[2] == stopcount[8]) && (stopcount[5] == stopcount[8])) {
+                result.innerHTML = "세번째 세로줄 성공!!"
+            }
+            else if ((stopcount[0] == stopcount[4]) && (stopcount[0] == stopcount[8]) && (stopcount[4] == stopcount[8])) {
+                result.innerHTML = "역 슬래시 성공!"
+            }
+            else if ((stopcount[2] == stopcount[4]) && (stopcount[2] == stopcount[6]) && (stopcount[4] == stopcount[6])) {
+                result.innerHTML = "/성공!"
+            }
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>
