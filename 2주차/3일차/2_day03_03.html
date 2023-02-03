@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    숫자1:<input type="text" id="num1" size="5"><br />
+    숫자2:<input type="text" id="num2" size="5"><br />
+    숫자3:<input type="text" id="num3" size="5"><br />
+    <input type="button" id="resultBtn" value="확인">
+    <div id="result">결과:</div>
+
+    <script>
+        let num1 = document.getElementById("num1")
+        let num2 = document.querySelector('#num2')
+        let num3 = document.querySelector('#num3')
+        let result = document.querySelector("#result")
+
+        let resultBtn = document.getElementById('resultBtn');
+
+
+        resultBtn.onclick = function() {
+            let intnum1 = parseInt(num1.value)
+            let intnum2 = parseInt(num2.value)
+            let intnum3 = parseInt(num3.value)
+
+            let arr=[intnum1, intnum2, intnum3]
+
+            // let a=intnum1>intnum2?intnum1:intnum2;
+            // let b=a>intnum3?a:intnum3;
+            //부등호의 방향만 바꿔주면 최댓값 최솟값을 묻는게 달라짐.
+
+            // let b= intnum1>intnum2?(intnum1>intnum3? intnum1: intnum3):(intnum2>intnum3?intnum2:intnum3);
+
+            let max = Math.max.apply(null, arr)
+            let min = Math.min.apply(null, arr)
+
+            result.innerHTML = "최댓값:"+max+" 최솟값:"+min
+            
+        }
+
+    </script>
+</body>
+
+</html>
