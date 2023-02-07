@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>짝맞추기 게임(직접)</title>
+    <style>
+        div#puzzle {
+            width: 400px;
+        }
+
+        div.cell {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            box-sizing: border-box;
+            float: left;
+            line-height: 100px;
+            text-align: center;
+            font-size: 36px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="puzzle"></div>
+
+    <script>
+        class Cell {
+            constructor(parentElement, content, callback) {
+                this.parentElement = parentElement;
+                this.cells = []
+                this.newDiv = document.createElement("div");
+                this.newDiv.innerHTML = content;
+                this.newDiv.className = "cell";
+                this.newDiv.addEventListener('click', (event) => {
+                    this.callback = callback;
+
+                    console.log(event.target.innerText)
+
+                });
+                parentElement.appendChild(this.newDiv);
+                return this;
+            }
+        }
+        let puzzle = document.getElementById("puzzle");
+        class Puzzle {
+            constructor(element) {
+                this.element = element;
+                for (var i = 0; i < 16; i++) {
+                    new Cell(this.element, String.fromCharCode(65 + i % 8), function () {
+                        //fromCharCode는 아스키코드의 값을 글자로 바꿔주는것
+                        console.log(this);
+                    })
+                }
+            }
+            shuffle() {
+                //카드의 위치를 섞어주는것
+                console.log(this.element)
+                this.cells = this.element.getElementsByTagName("div");
+                for(let i = 0; i<30; i++) {
+                let a = 1+Math.floor(Math.random() * 16)
+                let k = Math.floor(Math.random()*16)
+                let tmp = this.cells[a].innerText;
+                this.cells[a].newDiv.innerText = this.cells[k].newDiv.innerText
+                this.cells[k].newDiv.innerText = tmp;
+                }
+                parentElement.appendChild(this.newDiv)
+                return this;
+            }
+
+            start(){
+                this.cells[i].startCellEvent();
+                console.log("start",);
+                return this;
+            }
+        }
+        new Puzzle(puzzle).shuffle().start();
+    </script>
+</body>
+
+</html>
