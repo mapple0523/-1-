@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상속 실습</title>
+    <style>
+        div#box{
+            border:2px solid red;
+            padding: 5px;
+        }
+        myDiv{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">Box</div>
+
+    <script>
+
+    //object>eventtarget>node>element>htmlElement>htmlDIvElement
+        document.getElementById('box');
+        console.dir(box)
+
+    class MyDiv extends HTMLDivElement{
+        constructor(){
+            console.log("MyDiv 엘리먼트 생성")
+        }
+
+        testDiv(){
+            console.log("test div 메소드 호출")
+        }
+    }
+
+    let myDiv = document.createElement("Mydiv")
+    myDiv.innerHTML = "myDiv"
+    box.appendChild(myDiv)
+    
+    </script>
+</body>
+</html>
