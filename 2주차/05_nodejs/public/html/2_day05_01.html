@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStroge 실습</title>
+</head>
+<body>
+    <h1>localStroge 실습</h1>
+
+    <script>
+        let arr = ["오징어","꼴뚜끼","문어","해삼","성게"]
+        localStorage.setItem("user","홍길동")
+        localStorage.setItem("fishs",arr)
+        localStorage.removeItem("fish")
+        let a=localStorage.getItem("fishs")
+        document.write("<h2>"+arr+"</h2>")
+
+        let fish2 = localStorage.getItem("fishs")
+        document.write("<br/>"+fish2)
+    </script>
+</body>
+</html>
