@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 실습</title>
+</head>
+
+<body>
+    <h2>JavaScript Arrays</h2>
+
+    <p></p>
+
+    <p id="demo"></p>
+
+    <script>
+        const numbers = [65, 44, 12, 4];
+        const newArr = numbers.map(function (num) {
+            //map은 배열안에있는 모든값을 호출하여라.
+            return "<h2>" + num + "</h2>";
+        });
+
+        let demo = document.getElementById('demo');
+        newArr.forEach(function (elem) {
+            demo.innerHTML += elem;
+        });
+    </script>
+</body>
+
+</html>
