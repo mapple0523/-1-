@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax실습2</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"
+        integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <form action="" id="inputForm" method="get">
+        NAME : <input type="text" id="name" value="test"> <br />
+        Email: <input type="text" id="email" value="test2@saram.com"> <br />
+        Phone: <input type="text" id="phone" value="010-2222-2222"> <br />
+        <input type="submit" value="SAVE">
+    </form>
+    <div id="demo">
+        <!-- ajax기술로 saram_data.json파일의 내용을 로드한다. -->
+
+    </div>
+    <p><button id="loadBtn">Load Button</button></p>
+
+    <script type="text/template" id="saramListTemp">
+        <table border="1" width="100%">
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>전화번호</th>
+            </tr>
+            <% for(let row of saramList) { %>
+                <tr>
+                    <td>
+                        <%=row.no%>
+                    </td>
+                    <td>
+                        <%=row.name%>
+                    </td>
+                    <td>
+                        <%=row.email%>
+                    </td>
+                    <td>
+                        <%=row.phone%>
+                    </td>
+                </tr>
+                <% } // end of for %>
+        </table>
+    </script>
+
+    <script>
+        let demo = document.getElementById('demo');
+        let loadBtn = document.getElementById('loadBtn');
+        let saramListTemp = document.getElementById('saramListTemp');
+        let inputForm = document.getElementById('inputForm');
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let phone = document.getElementById('phone').value;
+
+        // 라이브러리의 ajax로 대체되는 함수
+        function myGetAjax(srcUrl, callback) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = (event) => {
+                callback(xhttp);
+            };
+            xhttp.open("GET", srcUrl, true);
+            xhttp.send();
+
+        }
+
+        // inputForm의 전송 버튼을 누르면 데이터가 전송 되도록.
+        inputForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            let form = event.target;
+            console.log(event.target)
+
+            myGetAjax('/js/saram_data.json', (xhttp) => {
+                let saramList = JSON.parse(xhttp.responseText)["saramList"];
+
+                let saramList2 = {  name: name, email: email, phone: phone }
+
+                saramList.push(saramList2)
+                let compile = _.template(saramListTemp.innerHTML)
+                let html = compile({ saramList })
+                demo.innerHTML = html;
+
+            })
+
+        })
+
+        loadBtn.addEventListener('click', function (event) {
+            myGetAjax('/js/saram_data.json', (xhttp) => {
+                let saramList = JSON.parse(xhttp.responseText)["saramList"];
+
+                let compile = _.template(saramListTemp.innerHTML)
+                let html = compile({ saramList })
+                demo.innerHTML = html;
+                console.log(saramList)
+                //처리하는 방식(get,post), 주소, 동기 비동기 설정
+
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
