@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로토타입 실습2(showinfo)</title>
+</head>
+
+<body>
+    <script>
+        String.prototype.aaa = function () {
+            console.log(this)
+        }
+        let a = "hello"
+        a.aaa()
+
+        //생성자 내부에 함수를 추가하면 소스코드에 모든 객체에 복제된다.
+         function People(name,age){
+             this.name = name;
+             this.age = age;
+
+            //   this.showInfo = function(){
+            //   //document.write(name + ": "+age+"세" )
+            //  }
+          }
+
+        //클래스.prototype은 모든 객체가 공유하는 속성이다.
+        People.prototype.showInfo = function () {
+            document.write("<p>"+this.name+"<p>"+this.age)
+        }
+
+        function Student (name, age, major) {
+            this.name = name;
+            this.age = age;
+            this.major = major;
+        }
+
+        Student.prototype = new People(); //부모의 프로토타입을 넣어버리는것
+        //Student.prototype.constructor = Student;
+        //프로토타입을 다른 클래스의 객체로 바뀐상태라
+        //생성자도 사라졌을수도 있으니 student의 생성자로 사용하라.
+        Student.prototype.showInfo = function() {
+            document.write("<p>"+this.name+"<p>"+this.age+"<p>"+this.major)
+        }
+
+        let kim = new People("김길동", 23)
+        kim.showInfo()
+        let lee = new People("김길동", 23)
+        kim.showInfo()
+
+        let park = new Student("박길동",12,"컴퓨터")
+        park.showInfo()
+    </script>
+</body>
+
+</html>
