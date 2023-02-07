@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax실습</title>
+    <script>
+        function loadDoc() {
+            alert("loadDoc() 호출")
+            const xhttp = new XMLHttpRequest();
+            //뒤에있는 웹 서버와 데이터를 교환하는데 사용 + 웹 페이지의 일부를 업데이트하지않고 전체페이지를 새로고침
+            xhttp.open("GET", "/js/ajax_info.txt", true);
+            //xhttp.open("GET", "localhost:3000/js/ajax_info.txt", true);
+            //live서버는 포트와 주소가 다르기때문에 크로스 오리진 문제를 해결 해줘야지 사용가능
+            xhttp.send();//전송요청
+            xhttp.onload = function () {
+                document.getElementById("demo").innerHTML = this.responseText;
+            }
+        }
+        //데이터를 교환하는 상수를 만들고
+        //txt파일을 열어서 onload는 개체가 로드되었을때 사용
+        //그로인해서 안에있는 내용이 응답받은 txt로 변환이되고
+        //보내준다.
+    </script>
+</head>
+
+<body>
+    <div id="demo">
+        <h2>Let AJAX change this text</h2>
+        <button type="button" onclick="loadDoc()">Change Content</button>
+    </div>
+</body>
+
+</html>
