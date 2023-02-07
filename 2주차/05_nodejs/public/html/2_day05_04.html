@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax실습2</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"
+        integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div id="demo">
+        <!-- ajax기술로 saram_data.json파일의 내용을 로드한다. -->
+    </div>
+    <p><button id="loadBtn">Load Button</button></p>
+
+    <script>
+        let demo = document.getElementById('demo');
+        let loadBtn = document.getElementById('loadBtn');
+
+        loadBtn.addEventListener('click', function (event) {
+            alert("load button 클릭");
+            const xhttp = new XMLHttpRequest();
+            //console.log(xhttp)
+            //요청 결과 전송 후 처리하는 이벤트 핸들러
+            xhttp.onload = function (event) {
+                let resTxt = xhttp.responseText;
+                //그냥 문자열로 들고오는것
+                console.log(resTxt)
+                let saram_data = JSON.parse(resTxt);
+                //객체로 바꾸는것
+                console.log(saram_data)
+                let saram = saram_data["saramList"]
+                //saram_data에서 객체 이름인 객체를 들고오는것saramList를 가져오는것
+                console.log(saram)
+            };
+            //처리하는 방식(get,post), 주소, 동기 비동기 설정
+            xhttp.open("GET", '/js/saram_data.json', true);
+            xhttp.send();
+        })
+    </script>
+
+</body>
+
+</html>
