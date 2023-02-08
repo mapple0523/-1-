@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>오징어</li>
+        <li>꼴뚜기</li>
+        <li>명태</li>
+        <li>가리비</li>
+        <li>213</li>
+    </ul>
+
+    <script>
+        let colors = ["red","green","blue","aqua","black"]
+        let a = $("ul>li");
+         for(let i=0; i<a.length; i++){
+         }
+
+        $("ul>li").css("background-color",function(index){
+            return colors[index]
+        })
+
+        $("ul>li").on("click", function(item, index, x) {
+        })
+    </script>
+</body>
+</html>
