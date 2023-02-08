@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 실습</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script>
+        console.dir($(document));
+
+        //jQuery의 진입점
+        //문서를 모두 로드하면 함수를 실행한다.
+        $(document).ready(function () {
+            $("#clickBtn").on("click", function() {
+                alert("hello")
+            })
+        });
+    </script>
+</head>
+
+<body>
+
+    <button id="clickBtn">Click <Menu></Menu></button>
+</body>
+
+</html>
