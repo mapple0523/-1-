@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"
+        integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>single page application 실습</title>
+
+    <script type="text/template" id="carListTmp">
+        <table width="100%", border="1">
+            <tr>
+                <th>no</th>
+                <th>name</th>
+                <th>price</th>
+                <th>company</th>
+                <th>year</th>
+                <th>수정</th>
+                <th>삭제></th>
+            </tr>
+<% 
+for(let car of carList) {
+%>
+            <tr>
+                <td><%=car.no%></td>
+                <td><%=car.name%></td>
+                <td><%=car.price%></td>
+                <td><%=car.company%></td>
+                <td><%=car.year%></td>
+                <td><button class="modifyBtn" data-no=<%=car.no%>>수정</button></td>
+                <td><button class="delBtn" data-no=<%=car.no%>>삭제</button></td>
+            </tr>
+<%
+        }//end of for
+%>
+        </table>
+    </script>
+</head>
+
+<body>
+    <h1>중고차 매매 쇼핑몰</h1>
+    <form id="carForm" method="post">
+        <table>
+            <caption>중고차 정보 입력</caption>
+            <tr>
+                <th>차종</th>
+                <td><input type="text" name="name" value="Sorento"></td>
+            </tr>
+            <tr>
+                <th>가격</th>
+                <td><input type="text" name="price" value="4500"></td>
+            </tr>
+            <tr>
+                <th>회사</th>
+                <td><input type="text" name="company" value="KIA"></td>
+            </tr>
+            <tr>
+                <th>연식</th>
+                <td><input type="text" name="year" value="2023"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" name="" value="입력"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="carListBox"></div>
+    <button id="delete1">삭제</button>
+
+
+    <script>
+        let carListArr = [];
+        let carForm = document.getElementById("carForm");
+        function drawList(carList) {
+            carListArr = carList
+            let compile = _.template($("#carListTmp").html());
+            let html = compile({ carList })
+            $("#carListBox").html(html);
+            //innerHTML과 같은역할.
+
+
+            $("button.modifyBtn").on("click", function () {
+                let no = $(this).data("no");
+                let index = carListArr.findIndex(function (carData) {
+                    return carData.no == no;
+                })
+
+                $.post("/car/modify", function (data) {
+                    return carList[index].name = carForm.name.value,
+                        carList[index].price = carForm.price.value,
+                        carList[index].compnay = carForm.company.value,
+                        carList[index].year = carForm.year.value
+                })
+
+            })
+
+            $("button.delBtn").on("click", function () {
+                let no = $(this).data("no")
+                let index = carListArr.findIndex(function (carData) {
+                    return carData.no == no;
+                })
+                let paramData = carList.splice(index, 1)
+                $.post("/car/delete", paramData, function (data, status, xhr) {
+                    drawList(data);
+                })
+            })
+        }
+
+        $(document).ready(function () {
+            $.get('/car', function (data, status, xhr) {
+                if (status === 'success') {
+                    let carList = data;
+                    drawList(carList);
+                }
+            });
+
+
+
+
+            $("#carForm").on("submit", function (event) {
+                event.preventDefault();
+                let paramData = {
+                    name: $(this.name).val(), //this.name.value와 같음
+                    price: $(this.price).val(),
+                    company: $(this.company).val(),
+                    year: $(this.year).val()//value와 마찬가지,
+                }
+                $.post("/car", paramData, function (data, status, xhr) {
+                    drawList(data);
+                })
+            })
+        });
+    </script>
+</body>
+
+</html>
