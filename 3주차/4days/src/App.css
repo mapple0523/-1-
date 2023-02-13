@@ -1,0 +1,9 @@
+input[disabled] {
+  border: 1px;
+  background-color:white;
+}
+
+.checked {
+  color:grey;
+  text-decoration-line: line-through;
+}
