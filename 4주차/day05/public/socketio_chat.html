@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/board.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <style>
+        #result {
+            width: 300px;
+            height: 290px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cv"></canvas>
+
+    
+
+    <div id="menu">
+        <button id="clear">clear</button>
+        <fieldset>
+            <legend>색상변경</legend>
+            <select id="pen_color"></select>
+        </fieldset>
+        <fieldset>
+            <legend>펜 두깨</legend>
+            <select id="pen_width"></select>
+        </fieldset>
+        <fieldset id="pen_shape">
+            <legend>펜 모양</legend>
+        </fieldset>
+
+        <button id="connectBtn">연결하기</button>
+        <button id="closeBtn">접속 해제</button>
+        <hr />
+        <input id="userId" value="test01">
+        <input id="userName" value="테스트01">
+        <input type="text" id="userMessage" value="123">
+        <button id="loginBtn">로그인</button>
+        <hr />
+        받는 사람 ID:<input id="receiveId" value="test01"> <br />
+        메세지: <input id="sendMsg" value="hello"><br />
+        <button id="sendBtn">전송</button>
+        <div id="result">결과:
+            <hr />
+        </div>
+        <hr />
+        <hr/>
+    </div>
+    <br/>
+
+
+    <script>
+        let userMessage = document.getElementById("userMessage");
+        let userName = document.getElementById("userName");
+        let userId = document.getElementById("userId");
+        let result = document.getElementById("result");
+        let connectBtn = document.getElementById("connectBtn");
+        let closeBtn = document.getElementById("closeBtn");
+        let loginBtn = document.getElementById("loginBtn");
+        let sendBtn = document.getElementById("sendBtn");
+        let sendMsg = document.getElementById("sendMsg");
+        let receiveId = document.getElementById("receiveId");
+
+        function connection() {
+            socket = io.connect("http://localhost:3000");
+            socket.on("connect", function () {
+                console.log("socket server에 연결 됨.");
+
+            });
+
+
+            socket.on("send message", function (data) {
+                console.log(data)
+                let newLine = result.innerText + data.sender + ": " + data.message;
+                result.innerHTML = newLine + "<hr/>";
+                //서버에서 send message로 보내면 기존 결과값에 data.send와 message를 받아서 입력해준다.
+
+            })
+
+            socket.on("non", function(data) {
+                console.log(data)
+                alert(data+"가 접속해있지 않습니다..")
+            })
+
+            sendBtn.addEventListener("click", function (event) {
+                //전송 버튼을 누르면
+                console.log(userId.value, receiveId.value, sendMsg.value)
+                if (socket) {
+                    let sendData = {
+                        sender: userId.value,
+                        receive: receiveId.value,
+                        message: sendMsg.value
+                    }
+                    socket.emit("send", sendData);
+                    //send에 sendData를 넣어준다.
+                }
+            })
+        }
+
+        connectBtn.addEventListener("click", function (event) {
+            connection();
+        })
+
+        closeBtn.addEventListener("click", function (event) {
+            if (socket) {
+                socket.close();
+            }
+        })
+
+        loginBtn.addEventListener("click", function (event) {
+            if (socket) {
+                socket.emit("login", {
+                    userId: userId.value,
+                    userName: userName.value,
+                    Message: userMessage.value
+                });
+            } else {
+                alert("소켓 연결 먼저 하시오.");
+                connectBtn.focus();
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>
