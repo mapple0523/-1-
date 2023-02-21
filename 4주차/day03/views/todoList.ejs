@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <title>할일목록</title>
+    <style>
+        td.hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <form action="todoList" method="post">
+            할일: <input type="text" value="새 할일" name="newItem">
+            <input type="submit" value="저장">
+        </form>
+    </div>
+    <table>
+        <tr>
+            <th width="10%">번호</th>
+            <th width="10%">체크</th>
+            <th width="0%">할일</th>
+            <th width="10%">삭제</th>
+            <th width="10%">수정</th>
+        </tr>
+
+        <% for(let todo of todoList) { %>
+            <tr>
+                <td>
+                    <%=todo.idx%>
+                </td>
+                <td><input type="checkbox" class="check" ></td>
+                <td class="showTitle">
+                    <%=todo.title%>
+                </td>
+                <td class="showInput hide">
+                    <input value="<%=todo.title%>" />
+                </td>
+                <td><button class="deleteBtn" data-idx="<%=todo.idx %>">삭제</button></td>
+                <td><button class="modifyBtn" data-idx="<%=todo.idx %>">수정</button></td>
+            </tr>
+            <% } %>
+
+
+    </table>
+
+    <script>
+        let count = 1;
+
+
+        $("input.check").change(function () {
+
+            console.log(this.checked)
+            //this.checked로 체크가 되어있는지 아닌지 확인이 쉽게 가능했다..
+
+
+            let row = $(this).parent().parent().find("td.showTitle")
+            //input.check.change안에다가 count값을 넣어버려서 count값이 계속 1로 돌아왔음
+            if (this.checked==true) {
+                row.css("text-decoration", "line-through")
+                //count++;
+                //count가 1일때 값을 변화
+                //1이면 값을 올려주어 else if를 사용하게함    
+            }
+            else if (this.checked==false) {
+                row.css("text-decoration", "none")
+                //count--;
+                //count가 2일때 값을 변화
+            }
+            //this.checked를 이용하여서 쉽게 풀이하였음~
+
+            
+
+        })
+
+
+        $("button.deleteBtn").click(function () {
+            let idx = $(this).data("idx");
+            let urlStr = "/todoList/delete?idx=" + idx;
+
+
+            location.assign(urlStr)
+        })
+
+
+        $("button.modifyBtn").click(function () {
+            let row = $(this).parent().parent()
+
+            if (row.find("td.showTitle").css("display") !== "none") {
+                //console.log(row.find("td.showTitle"));
+                row.find("td.showTitle").hide();
+                row.find("td.showInput").show();
+                $(this).text("완료");
+            } else {
+                row.find("td.showTitle").show();
+                row.find("td.showInput").hide();
+                $(this).text("수정");
+                //서버로 변경 내용과 idx를 보낸다.
+                //페이지가 변경 되면서 query string으로 파라미터 전송.
+                let title = row.find("td.showInput>input").val()
+                let idx = $(this).data("idx");
+                let urlStr = "/todoList/update?idx=" + idx + "&title=" + title
+                //console.log(urlStr)
+                location.assign(urlStr);
+                
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>
