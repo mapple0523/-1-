@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <form>
+        <div id="box" style="width:300px;height:300px;border:1px solid red;overflow:scroll;"></div>
+        <!-- 박스를 만들고 -->
+        사용자: <input type="text" name="sender"><br>
+        메세지: <input type="text" name="message">
+        <input type="submit" value="전송">
+        <!-- input타입 두개를 만듬 -->
+    </form>
+</head>
+
+<body>
+    <script>
+        var size = 0;
+        setInterval(function () {
+            var url = "http://localhost:3000/recieve?size=" + size;
+            //반복이 돌아가면서 receive에사이즈를 넣어줌(get방식)
+            var xhr = new XMLHttpRequest();
+            //console.log(xhr);
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200 && this.responseText != "") {
+                    //XMLHttpRequest에 있는 걸 이용해서 현재 상태,글자수 텍스트가 비어있는지 확인한다.
+                    let data = this.responseText;
+                    let obj = JSON.parse(this.responseText);
+                    //받아온걸 파싱을하여서
+                    let messages = obj.messages;
+                    // 파싱한값 안에 메세지를 받아오고
+                    let rows = $("#box").html();
+                    for (var i = 0; i < messages.length; i++) {
+                        rows += (messages[i].sender + ": " + messages[i].message + "<br>");
+                        //메세지의 길이만큼 반복을 시켜서 받는사람을 왼쪽 메세지를 오른쪽에 둠.
+                        //보내질때 ?뒤에 input의 name의값 sender와 message의 값이 붙어나오기 때문에 파싱한값에서 sender와 message를 읽어옴
+                    }
+                    $("#box").html(rows);
+                    size = Number(obj.total);
+                }
+            }
+            xhr.open("get", url, true);
+            xhr.send();
+
+        }, 1000);
+
+        $('form').submit(function () {
+            event.preventDefault();
+            var sender = $(':input[name=sender]').val();
+            //sender는 input에서 이름이 sender인 객체의 value를 반환하고
+            var message = $(':input[name=message]').val();
+            //message는 input에서 이름이 message인 객체의 value를 반환함
+            var url = "http://localhost:3000/send?sender=" + sender + "&message=" + message;
+            //url에는 sender에 값을 sender로넣고 message에는 message의 값을 넣어줌
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () { }
+            xhr.open("get", url, true);
+            xhr.send();
+        });
+
+    </script>
+</body>
+
+</html>

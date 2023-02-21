@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- 같은 서버상에 있는걸 사용하는것 -->
+    <!-- <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script> -->
+    <!-- 다른 포트에있는걸 사용할때 cors문제가 발생할수도있음 -->
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var socket = io();
+        //다른 주소에 있는데를 연결할때는 connect뒤에 입력해주어야함
+
+        let chatSocket = io.connect("http://localhost:3000/chat")
+        let newsSocket = io.connect("http://localhost:3000/news")
+
+        chatSocket.on("connect", function(data) {
+            console.log("chat socket 연결 됨.")
+            chatSocket.on("chat message", data)
+        });
+
+        newsSocket.on("connect", function() {
+            console.log("newsSocket 연결 됨")
+        })
+
+        socket.emit("private message", "나", "감사합니다.");
+    </script>
+
+</body>
+
+</html>
